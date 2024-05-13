@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://koreQAQ.github.io</id>
+    <title>Gridea</title>
+    <updated>2024-05-13T01:25:54.158Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://koreQAQ.github.io"/>
+    <link rel="self" href="https://koreQAQ.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://koreQAQ.github.io/images/avatar.png</logo>
+    <icon>https://koreQAQ.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[获利形态与动能穿透、市场结构]]></title>
+        <id>https://koreQAQ.github.io/post/huo-li-xing-tai-yu-dong-neng-chuan-tou-shi-chang-jie-gou/</id>
+        <link href="https://koreQAQ.github.io/post/huo-li-xing-tai-yu-dong-neng-chuan-tou-shi-chang-jie-gou/">
+        </link>
+        <updated>2024-05-13T01:22:15.000Z</updated>
+        <content type="html"><![CDATA[<p>在获利形态中，Lary 提到了3种胜率较高的”技巧“形态</p>
+<ul>
+<li>攻击日（外移日）与 隐蔽攻击日</li>
+<li>”哎呀“ 形态</li>
+<li>孕线（内移动日）</li>
+</ul>
+<p>这里就与市场结构中 高低点的判断 有了联系<br>
+高低点的判别要去除到这些形态的干扰</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[动能穿透与市场结构]]></title>
+        <id>https://koreQAQ.github.io/post/dong-neng-chuan-tou-yu-shi-chang-jie-gou/</id>
+        <link href="https://koreQAQ.github.io/post/dong-neng-chuan-tou-yu-shi-chang-jie-gou/">
+        </link>
+        <updated>2024-05-11T01:34:35.000Z</updated>
+        <content type="html"><![CDATA[<p>在阅读”威廉姆斯“ 短线交易秘诀时，<br>
+在第一章 市场结构 中给出了一个交易策略，该策略基于枢纽点。</p>
+<blockquote>
+<p>中期低点不断上移，确认是多头趋势。以上移之后短期高点被击破作为多头入场信号；止损点为前一个短期低点。<br>
+中期高点不断下移，确认是空头趋势。以下移之后短期低点被击破作为空头入场信号；止损点为前一个短期高点。</p>
+</blockquote>
+<p>之后又提到了，市场高低点可能形成的条件：收盘距离最高、最低价越近，其形成的高低点的可能性越强。<br>
+这里不是指这当时就是高、低点，而是一个高低点区域。</p>
+<p>但在 动能穿透 篇章<br>
+作者又提到</p>
+<blockquote>
+<p>当价格向上（向下）突破当天开盘价 加上（减去） 前一日波幅的 70% 时，入场做多（做空）。止损点放在当天开盘价 减去 （加上）前一日波幅的50%处</p>
+</blockquote>
+<p>这个策略与第一章的趋势策略似乎不是同一种，我不知道这个策略是否可以融入到第一张的趋势策略中。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[AOS 手册]]></title>
+        <id>https://koreQAQ.github.io/post/aos-shou-ce/</id>
+        <link href="https://koreQAQ.github.io/post/aos-shou-ce/">
+        </link>
+        <updated>2024-04-26T02:34:59.000Z</updated>
+        <content type="html"><![CDATA[<pre><code class="language-lua">function Prompt()
+    return &quot;shubin &gt; &quot; 
+end 
+</code></pre>
+<p>在aos终端通过<code>.load</code>来加载这个脚本，可以看到终端前缀已经发生变化</p>
+<pre><code>shubin &gt; 
+</code></pre>
+<p>在<code>.load</code>脚本时，如果有</p>
+<p>收件箱 模式（异步）</p>
+<p>在 aos 中，进程通过 handlers 获取消息并且执行。未处理的消息将进入进程的收件箱(Inbox)</p>
+<p>Handlers 中有三个参数：</p>
+<ul>
+<li>Handler 名字</li>
+<li>匹配函数</li>
+<li>处理函数</li>
+</ul>
+<pre><code class="language-lua">Handlers.add(&quot;name&quot;,
+-- 匹配函数
+  function (Msg)
+    -- Does this message match (return true or false)
+    return Msg.Action == &quot;Register&quot;
+  end,
+  -- 处理函数
+  function (Msg)
+    print(&quot;Registered User.&quot;)
+    table.insert(Members, Msg.From)
+    ao.send({Target = Msg.From, Data = &quot;Registered.&quot;})
+  end
+)
+</code></pre>
+<p>关于收件箱<br>
+<strong>收件箱会存储尚未处理的消息，它们在这里等待被处理。一旦消息被处理，它就会被从收件箱中移除。</strong> 只能被处理一次？</p>
+<p>示例：将收件箱视为语音邮件。 正如未接听的电话会被转至语音信箱，让你稍后处理一样，你的进程不立即处理的消息都会进入收件箱。未处理的消息将被存储在这里，直到你处理他们</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[开发命名思考与规范]]></title>
+        <id>https://koreQAQ.github.io/post/kai-fa-ming-ming-si-kao-yu-gui-fan/</id>
+        <link href="https://koreQAQ.github.io/post/kai-fa-ming-ming-si-kao-yu-gui-fan/">
+        </link>
+        <updated>2024-04-25T01:16:10.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="命名流程">命名流程</h2>
+<p>它为什么会存在，做什么事、应该怎么用</p>
+<h2 id="类名">类名</h2>
+<blockquote>
+<p>在我看来，类名是一种类型的抽象，但我们无法直接得到这种抽象。这就好比我们不可能根据生物的种类、科目而决定生物的演化；决定生物的形成。恰恰相反，我们是先通过多种生物进而进一步进行的抽象。<br>
+举个例子：先有狗再有的犬科，而不是先有犬科，大自然（或者造物主）根据犬类的规范创建的狗的实例。<br>
+综合上述的表达，可以由实例进行引导出抽象，也就是类的形成。所以类必须依托于其实例，其这个实例能在业务中使用。那么这个实例的抽象就只能是名词，因为根据语言学的知识，主语、宾语都是名词形式。</p>
+</blockquote>
+<ol>
+<li>根据实例被用到的地方以及主动或被动动作想出3个名词
+<ol>
+<li>生活或者专业术语</li>
+<li>上下文越多名词越长</li>
+</ol>
+</li>
+<li>列出这些名词可能属性和行为</li>
+<li>选出属性最少、行为最少、长度最短的名词作为类名</li>
+</ol>
+<h2 id="方法签名包括返回值">方法签名（包括返回值）</h2>
+<p>这里方法的参数列表和返回值要根据重构来确定，所以只讨论方法名</p>
+<ol>
+<li>行为是目标的主语或宾语。如果不是则证明方法的位置错了</li>
+<li>不要带返回值类型和参数类型类型（单复数参考变量名）</li>
+<li>使用静态工厂方法创建优于构造器创建</li>
+</ol>
+<h2 id="接口名">接口名</h2>
+<p>形容词</p>
+<h2 id="变量名">变量名</h2>
+<h3 id="类实例">类实例</h3>
+<p>直接使用类名的小写，不区分可数名词与不可数名词</p>
+<h3 id="基础类型包括包装类型">基础类型（包括包装类型）</h3>
+<ol>
+<li>一般不使用局部变量名称，尝试将其封装在类的属性中通过实例获取</li>
+<li>状态位、标志位 采用方法化 -&gt; 实例化</li>
+</ol>
+<h3 id="容器实例">容器实例</h3>
+<p>这里区分下类是 可数名词和不可数名词</p>
+<ol>
+<li>可数名词时
+<ol>
+<li>加入上下文条件 xxxsWith(过滤项)，注意上下文不是类型！</li>
+<li>无过滤上下文直接按复数表达</li>
+</ol>
+</li>
+<li>不可数名词时<br>
+一律加the表示强调！</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[About]]></title>
+        <id>https://koreQAQ.github.io/post/about/</id>
+        <link href="https://koreQAQ.github.io/post/about/">
+        </link>
+        <updated>2024-04-19T02:09:40.000Z</updated>
+        <content type="html"><![CDATA[<p>测试一下功能</p>
+]]></content>
+    </entry>
+</feed>

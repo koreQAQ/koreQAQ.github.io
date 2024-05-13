@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>AOS 手册 | Gridea</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://koreQAQ.github.io/favicon.ico?v=1715563550716">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://koreQAQ.github.io/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://koreQAQ.github.io">
+        <img class="avatar" src="https://koreQAQ.github.io/images/avatar.png?v=1715563550716" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://koreQAQ.github.io">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">AOS 手册</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2024-04-26</span>
+            
+          </div>
+          <div class="post-content" v-pre>
+            <pre><code class="language-lua">function Prompt()
+    return &quot;shubin &gt; &quot; 
+end 
+</code></pre>
+<p>在aos终端通过<code>.load</code>来加载这个脚本，可以看到终端前缀已经发生变化</p>
+<pre><code>shubin &gt; 
+</code></pre>
+<p>在<code>.load</code>脚本时，如果有</p>
+<p>收件箱 模式（异步）</p>
+<p>在 aos 中，进程通过 handlers 获取消息并且执行。未处理的消息将进入进程的收件箱(Inbox)</p>
+<p>Handlers 中有三个参数：</p>
+<ul>
+<li>Handler 名字</li>
+<li>匹配函数</li>
+<li>处理函数</li>
+</ul>
+<pre><code class="language-lua">Handlers.add(&quot;name&quot;,
+-- 匹配函数
+  function (Msg)
+    -- Does this message match (return true or false)
+    return Msg.Action == &quot;Register&quot;
+  end,
+  -- 处理函数
+  function (Msg)
+    print(&quot;Registered User.&quot;)
+    table.insert(Members, Msg.From)
+    ao.send({Target = Msg.From, Data = &quot;Registered.&quot;})
+  end
+)
+</code></pre>
+<p>关于收件箱<br>
+<strong>收件箱会存储尚未处理的消息，它们在这里等待被处理。一旦消息被处理，它就会被从收件箱中移除。</strong> 只能被处理一次？</p>
+<p>示例：将收件箱视为语音邮件。 正如未接听的电话会被转至语音信箱，让你稍后处理一样，你的进程不立即处理的消息都会进入收件箱。未处理的消息将被存储在这里，直到你处理他们</p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://koreQAQ.github.io/post/kai-fa-ming-ming-si-kao-yu-gui-fan/">
+              <h3 class="post-title">
+                下一篇：开发命名思考与规范
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://koreQAQ.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
